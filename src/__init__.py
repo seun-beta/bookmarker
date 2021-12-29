@@ -1,5 +1,7 @@
 from flask import Flask
-import os 
+import os
+from src.auth import auth
+from src.bookmarks import bookmarks
 
 
 def create_app(test_config=None):
@@ -12,12 +14,7 @@ def create_app(test_config=None):
     else:
         app.config.from_mapping(test_config)
 
-    @app.get("/")
-    def index():
-        return "Hello World"
-
-    @app.get("/hello")
-    def hello_json():
-        return {"information": 1223, "just": "do it"}
+    app.register_blueprint(auth)
+    app.register_blueprint(bookmarks)
 
     return app
