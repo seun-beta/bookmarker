@@ -96,3 +96,16 @@ def me():
         "email": user.email
 
     }), HTTP_200_OK
+
+
+@auth.post("/token/refresh")
+@jwt_required(refresh=True)
+def refresh_users_token():
+    user_identity = get_jwt_identity()
+    accesss_token = create_access_token(identity=user_identity)
+
+    return jsonify({
+
+        "refresh": accesss_token
+        
+    }), HTTP_200_OK
