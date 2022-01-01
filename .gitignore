@@ -145,3 +145,4 @@ dmypy.json
 cython_debug/
 .vscode
 virtualenv.txt
+auth2.py
