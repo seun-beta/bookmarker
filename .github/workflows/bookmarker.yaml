@@ -1,4 +1,4 @@
-name: Django CI
+name: Bookmarker CI
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ staging ]
 
 jobs:
-  build:
+  continuous-integration:
 
     runs-on: ubuntu-latest
     strategy:
@@ -32,10 +32,11 @@ jobs:
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       with:
+        config: .github/config/bookmarker.yaml
         username: Bookmarker CI
         icon_url: https://octodex.github.com/images/yogitocat.png
         status: ${{ job.status }}
-        channel: '#lopa-backend-build'
+        channel: '#bookmarker-backend-build'
         steps:  ${{ toJson(steps) }}
         success_text: "${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build completed successfully"
         failure_text: "${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build failed"
