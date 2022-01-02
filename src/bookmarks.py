@@ -1,5 +1,8 @@
+from random import getrandbits
 from sys import _current_frames
+from threading import current_thread
 from flask import Blueprint, json, request, jsonify
+import jwt
 import validators
 from flask_jwt_extended import get_jwt_identity, jwt_required
 
@@ -161,3 +164,24 @@ def delete_bookmark(id):
     return jsonify({
         "message": "item successfully deleted"
     }), HTTP_204_NO_CONTENT
+
+@bookmarks.get("/stats")
+@jwt_required()
+def get_stats():
+    current_user = get_jwt_identity()
+
+    data = list()
+    items = Bookmark.query.filter_by(user_id=current_user).all()
+    for item in items:
+        new_link = {
+            "url": item.url,
+            "id": item.data,
+            "short_url": item.short_url,
+            "visits": item.visits
+
+        }
+        data.append(new_link)
+    
+    return jsonify({
+        "data": data
+    }), HTTP_200_OK
