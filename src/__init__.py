@@ -9,6 +9,7 @@ from src.bookmarks import bookmarks
 from src.constants.http_status_codes import HTTP_404_NOT_FOUND, HTTP_500_INTERNAL_SERVER_ERROR
 from src.models import db, Bookmark
 from src.config.swagger import template, swagger_config
+from src.manage import create_tables
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
@@ -37,6 +38,8 @@ def create_app(test_config=None):
     app.register_blueprint(bookmarks)
 
     Swagger(app, config=swagger_config, template=template)
+
+    app.cli.add_command(create_tables)
 
     @app.get("/<short_url>")
     @swag_from("./docs/short_url.yaml")
