@@ -104,7 +104,7 @@ def get_single_bookmark(id):
 
 
 @bookmarks.put("/<int:id>")
-@bookmarks.path("/<int:id>")
+@bookmarks.patch("/<int:id>")
 @jwt_required()
 def editbookmark(id):
     current_user = get_jwt_identity()
