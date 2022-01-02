@@ -1,0 +1,35 @@
+User Registration
+---
+tags:
+  - Authentication
+parameters:
+  - name: body
+    description: The body should contain the user registration data
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "email"
+        - "password"
+        - "username"
+      properties:
+        email:
+          type: "email"
+          example: "seunfunmi.adegoke@gmail.com"
+        password:
+          type: "string"
+          format: password
+          example: "********"
+        username:
+          type: "username"
+          example: "seunbeta"
+responses:
+  201:
+    description: When a user successfully registers
+
+  400:
+    description: Fails to register due to bad request data
+  
+  409:
+    description: Fails to regsiter because the provided details have been used before
