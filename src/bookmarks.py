@@ -1,3 +1,4 @@
+from sys import _current_frames
 from flask import Blueprint, json, request, jsonify
 import validators
 from flask_jwt_extended import get_jwt_identity, jwt_required
@@ -91,6 +92,46 @@ def get_single_bookmark(id):
             "error": "Item not found"
         }), HTTP_404_NOT_FOUND
 
+    return jsonify({
+            "id": bookmark.id,
+            "url": bookmark.url,
+            "short_url": bookmark.short_url,
+            "visits": bookmark.visits,
+            "body": bookmark.body,
+            "created_at": bookmark.created_at,
+            "updated_at": bookmark.updated_at
+        }), HTTP_200_OK
+
+
+@bookmarks.put("/<int:id>")
+@bookmarks.path("/<int:id>")
+@jwt_required()
+def editbookmark(id):
+    current_user = get_jwt_identity()
+
+    bookmark = Bookmark.query.filter_by(uer_id=current_user, id=id).first()
+
+    if not bookmark:
+        return jsonify({
+            "error": "Item not found"
+        }), HTTP_404_NOT_FOUND
+
+
+    body = request.json["body"]
+    url = request.json["url"]
+    
+    if not validators.url(url):
+        return jsonify({
+
+            "error": "enter a valid url"
+
+        }), HTTP_400_BAD_REQUEST
+    
+    bookmark.url = url
+    bookmark.body = body
+
+    db.session.commit()
+    
     return jsonify({
             "id": bookmark.id,
             "url": bookmark.url,
