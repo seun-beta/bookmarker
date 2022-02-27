@@ -58,7 +58,7 @@ def handle_bookmarks():
 
         data = list()
 
-        for bookmark in bookmarks:
+        for bookmark in bookmarks.items:
             data.append({
                 "id": bookmark.id,
                 "url": bookmark.url,
