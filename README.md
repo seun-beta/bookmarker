@@ -1,114 +1,207 @@
-<p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
-</p>
 
-<h3 align="center">Project Title</h3>
+
+
+<h3 align="center">Bookmarker API</h3>
 
 <div align="center">
 
-[![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+
 
 </div>
 
 ---
 
-<p align="center"> Few lines describing your project.
+<p align="center"> 
     <br> 
 </p>
 
 ## 📝 Table of Contents
 
 - [About](#about)
-- [Getting Started](#getting_started)
-- [Deployment](#deployment)
-- [Usage](#usage)
+- [Tech](#tech)
+- [Installation](#installation)
 - [Built Using](#built_using)
-- [TODO](../TODO.md)
-- [Contributing](../CONTRIBUTING.md)
 - [Authors](#authors)
+- [Collaboration](#collaboration)
+- [License](#license)
 - [Acknowledgments](#acknowledgement)
 
 ## 🧐 About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+bookmarker-api is the backend of <b>Bookmarker</b>, a bookmarking application.
 
-## 🏁 Getting Started <a name = "getting_started"></a>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+## 💻 Tech <a name = "tech"></a>
+bookmarker-api is written in [Python 3](https://www.python.org/) and [Flask 2.0.1](https://flask.palletsprojects.com/en/2.0.x/).
 
-### Prerequisites
 
-What things you need to install the software and how to install them.
+## ⚙️ Installation  <a name = "installation"></a>
 
+
+### Fedora 34(Workstation)
+
+Fedora contains many popular packages for Python. Usually, they are named with a python3- prefix, such as python3-requests.
+
+These are useful for scripting and exploring Python and for Fedora-specific applications. For software development or reproducible data analysis, it is better to use virtual environments.
+
+Please install these packages and set up your environment in the order listed below. Run an upgrade or update if you find that the package is already installed:
+
+- Python 3. Run the 'python3 -V' command to see the version you have installed.
+
+- Ensure you have python version >= 3.8+ installed.
+
+
+- Using VS Code as our text editor:  right click on the folder explorer and open a terminal
+
+
+Using virtual environments
+When you work on a project, it is good to keep it inside a virtual environment. It will keep the dependencies you need in one place and you do not have to worry about different projects which need different versions of the same module. It also makes it easy to collaborate with people who don’t use Fedora yet.
+
+- create a virtual environment 
+```sh
+<your_preferred_envname>
+``` 
+which will contain Python and pip. You can use pip to install a project’s dependencies.
+```sh
+python -m venv <your_preferred_envname>
 ```
-Give examples
+If you want to work in the virtual environment, you have to activate it.
+```sh
+source <your_preferred_envname>/bin/activate
 ```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
-
-## 🔧 Running the tests <a name = "tests"></a>
-
-Explain how to run the automated tests for this system.
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
+When the virtual environment is activated (you can see its name in brackets at the beginning of your prompt), you can install modules via pip install.
+```sh
+<your_preferred_envname> python -m pip install requests
 ```
 
-## 🎈 Usage <a name="usage"></a>
+That is all, you have successfully created your own virtual environment. Now you can run Python (see above) and start working on your project.
 
-Add notes about how to use the system.
+When you finish your work, you can deactivate the virtual environment.
+```sh
+ <your_preferred_envname>  deactivate
+```
 
-## 🚀 Deployment <a name = "deployment"></a>
+- Install requirements in the virtual environment created:
 
-Add additional notes about how to deploy this on a live system.
+```sh
+pip install -r requirements.txt
+```
+
+- Install [PostgreSQL](https://www.postgresql.org/).
+
+- Create a database with PostgresQL, the installation instructions for Fedora can be found [here](https://www.postgresql.org/download/linux/redhat/). Make sure to note Database name, Database Username and Password and also ensure that the server is running
+
+
+
+- Run server to ensure everything is working properly.
+- On The Terminal,
+
+```sh
+flask run
+```
+
+
+### Windows 10 Users
+
+Please install and set up the following packages first. Upgrade if you find the package is already installed:
+
+- Download [Python 3](https://www.python.org/downloads/). It is advisable to install the python package as an administrator. Click on the 'Add path' checkbox before moving on to the next step of the installation process. Run this command in your terminal to see the version you have installed.
+
+  ```sh
+  python3 -V
+  ```
+
+- Ensure you have python version >= 3.8+ installed.
+
+- Download [pip](https://pip.pypa.io/en/latest/installing/) and follow the instructions in the link as an installation guide.
+
+- [PostgreSQL](https://www.postgresql.org/download/windows/) (Ensure the server is running).
+
+- It is advisable to install Flask in a virtual environment. The README uses [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/install.html#basic-installation) to create this environment. You could use any virtualenv package of your choice but for Windows, install this wrapper with:
+
+  ```sh
+  pip install virtualenvwrapper-win
+  ```
+
+- Create a new virtual environment:
+
+  ```sh
+  mkvirtualenv <envname>
+  ```
+
+- Activate the virtual environment with:
+
+  ```sh
+  <envname>\Scripts\activate
+  ```
+  or use this command
+  ```sh 
+  & C:/Users/<username>/Envs/<envname>/Scripts/Activate.ps1
+  ```
+
+- Install requirements in the virtual environment created:
+
+  ```sh
+  pip install -r requirements.txt
+  ```
+
+* Run server to ensure everything is running properly.
+
+  ```sh
+  flask run
+  ```
+
+* Deactivate the virtual environment with:
+
+  ```sh
+  deactivate
+  ```
+
+- Create a database with PostgreSQL, if you installed it earlier. If not, installation instructions can be found [here](https://www.postgresql.org/download/windows/). Make sure to note database name, database username and password.
+
+
+### Python installation instructions for Windows, macOS and other Linux distro Users
+
+- The following may serve as a guide:
+  - (https://www.python.org/downloads/)
+  - (https://realpython.com/installing-python/)
+  - (https://virtualenvwrapper.readthedocs.io/en/latest/install.html)
+  - (https://realpython.com/learning-paths/flask-by-example/)
+
+
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
+- [Python](https://www.python.org/) - Server Environment
+- [Flask](https://flask.palletsprojects.com/en/2.0.x/) - Server Framework
+- [PostgreSQL](https://www.postgresql.org/) - Database
+- [GitHub Actions](https://github.com/features/actions) - CI/CD
+- [Heroku](https://www.heroku.com/) - Deployment
 
-## ✍️ Authors <a name = "authors"></a>
 
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
+## ✍️ Authors <a name = "authors"></a> 
+- [Seunfunmi](https://github.com/seun-beta) 
 
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
+## 🤝 Collaboration <a name = "collaboration"></a>
 
-## 🎉 Acknowledgements <a name = "acknowledgement"></a>
+- You need to have PostgresQL installed and set up on your machine.
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
+- Clone the repository from the `staging` branch and please read the [contributing guide](/CONTRIBUTING.md).
+
+- You may also need to have [Heroku](https://devcenter.heroku.com/articles/heroku-cli).
+
+- Update your environment variables by remaning the environment variables  file from `.env.example` to `.env` and provide entries for the environment placeholders in the `.env` file.
+  ```sh
+  heroku login
+  ```
+
+- Run the `Heroku` login commands in your terminal after installation
+  ```sh
+  heroku login
+  ```
+
+
+## 📝 License <a name = "license"></a>
+
+This project is licensed under the MIT License - see the [LICENSE](/LICENSE) file for more details.
+
